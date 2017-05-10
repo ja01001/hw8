@@ -28,7 +28,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     EditText e1;
-    Button b1;
     WebView web;
     ListView lv;
     LinearLayout ll;
@@ -77,12 +76,11 @@ public class MainActivity extends AppCompatActivity {
                 return super.onJsAlert(view, url, message, result);
             }
         });
-        web.loadUrl("http://m.naver.com");
+        web.loadUrl("http://m.naver.com"); // 초기 네이버
         WebSettings webSettings = web.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setCacheMode(webSettings.LOAD_NO_CACHE);
         web.addJavascriptInterface(new JavaScriptMethod(), "app");
-
         // set list click
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -108,11 +106,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).setNegativeButton("아니오",null).setMessage("정말?").show();
 
-                return true;
+                return true; // 길게 눌렀을때 onclick + onLongclick 이 같이 호출 될때는 true 로 바꾸면 끝
             }
         });
-
-
         ani = AnimationUtils.loadAnimation(this,R.anim.tt);
         ani.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -156,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }// java inter face
+    // handler 를 구현하지 않았더니 작동 x  꼭 써둘것!
     android.os.Handler han = new android.os.Handler();
     class JavaScriptMethod{
         @JavascriptInterface
